@@ -2,6 +2,8 @@
 
 ## Technologies used - React
 
+How to use: fork and "npm start"
+
 ## React tools used :   API calls, custom hooks, useEffect, UseState
 
 
