@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import StarRating from "./StarRating";
 import { KEY } from "./App";
 import { Loader } from "./Loader";
+import { useKey } from "./useKey";
 
 export function MovieDetails({
   selectedId,
@@ -13,6 +14,15 @@ export function MovieDetails({
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
+
+  const countRef = useRef(0);
+
+  useEffect(() => {
+    if (!userRating) return;
+    countRef.current++;
+    console.log(countRef.current);
+  }, [userRating]);
+
   const watchedUserRating = watched.find(
     (movie) => movie.imdbID === selectedId
   )?.userRating;
@@ -32,6 +42,18 @@ export function MovieDetails({
     Plot: plot,
   } = movieDetails;
 
+  // const [isTop, setIsTop] = useState(false);
+  // console.log(isTop);
+
+  // useEffect(() => {
+  //   setIsTop(imdbRating > 8);
+  // }, [imdbRating]);
+
+  const isTop = imdbRating > 8;
+  console.log(isTop);
+
+  const [avgRating, setAvgRating] = useState(0);
+
   const handleAdd = () => {
     const newWatchedMovie = {
       imdbID: selectedId,
@@ -41,10 +63,16 @@ export function MovieDetails({
       imdbRating: Number(imdbRating),
       runtime: Number(runtime.split(" ")[0]),
       userRating,
+      countRatingDecisions: countRef.current,
     };
     onAddWatch(newWatchedMovie);
     onCloseMovie();
+
+    // setAvgRating(Number(imdbRating));
+    // setAvgRating((avgRating) => (avgRating + userRating) / 2);
   };
+
+  useKey("Escape", onCloseMovie);
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -105,6 +133,7 @@ export function MovieDetails({
               </p>
             </div>
           </header>
+          {/* <p>{avgRating}</p> */}
           <section>
             <div className="rating">
               {!isWatched ? (
