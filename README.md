@@ -1,5 +1,7 @@
 # usePopcorn - Movie watch list - React app
 
+DEPLOYED AT https://deft-lolly-108d58.netlify.app
+
 ## Technologies used - React
 
 How to use: fork and "npm start"
