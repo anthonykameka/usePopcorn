@@ -31,28 +31,14 @@ export function MovieDetails({
     Title: title,
     Year: year,
     Poster: poster,
-    imdbRating: imdbRating,
+    imdbRating,
     Released: released,
     Actors: actors,
     Director: director,
     Genre: genre,
-    Writer: writer,
-    BoxOffice: boxOffice,
     Runtime: runtime,
     Plot: plot,
   } = movieDetails;
-
-  // const [isTop, setIsTop] = useState(false);
-  // console.log(isTop);
-
-  // useEffect(() => {
-  //   setIsTop(imdbRating > 8);
-  // }, [imdbRating]);
-
-  const isTop = imdbRating > 8;
-  console.log(isTop);
-
-  const [avgRating, setAvgRating] = useState(0);
 
   const handleAdd = () => {
     const newWatchedMovie = {

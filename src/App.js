@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { WatchedMoviesList } from "./WatchedMoviesList";
 import { MovieDetails } from "./MovieDetails";
 import { WatchedSummary } from "./WatchedSummary";
