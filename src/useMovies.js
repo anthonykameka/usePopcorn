@@ -2,15 +2,13 @@ import { useState, useEffect } from "react";
 
 const KEY = "d734f993";
 
-export const useMovies = (query, callback) => {
+export const useMovies = (query) => {
   const [movies, setMovies] = useState([]);
   // const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    callback?.();
-
     const controller = new AbortController();
 
     const fetchMovies = async () => {
@@ -29,8 +27,8 @@ export const useMovies = (query, callback) => {
         if (data.Response === "False") throw new Error(data.Error);
         setMovies(data.Search);
       } catch (err) {
-        console.log(err.message);
         if (err.name !== "AbortError") {
+          console.log(err.message);
           setError(err.message);
         }
       } finally {
@@ -48,7 +46,7 @@ export const useMovies = (query, callback) => {
     return function () {
       controller.abort();
     };
-  }, [query, callback]);
+  }, [query]);
 
   return { movies, isLoading, error };
 };
